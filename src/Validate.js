@@ -10,7 +10,7 @@ const Validate = {
         }
 
         //1~31 사이의 숫자가 아닌 경우
-        if ( 1 > inputDate || inputDate > 31) {
+        if (1 > inputDate || inputDate > 31) {
             throw new Error(ERROR_MSG.INVALID_DATE_MESSAGE);
         }
         return inputDate;
@@ -19,8 +19,8 @@ const Validate = {
     //주문 유효성 검사
     validateOrder(inputOrder) {
         let orderSum = 0;
-        this.validateOnlyDrink();
-        this.validateSameMenu();
+        this.validateOnlyDrink(inputOrder);
+        this.validateSameMenu(inputOrder);
         for (const [item, amount] of Object.entries(inputOrder)) {
             //숫자가 아닌 수로 주문한 경우
             if (isNaN(amount)) throw new Error(ERROR_MSG.INVALID_ORDER_MESSAGE);
@@ -52,7 +52,7 @@ const Validate = {
         const menuInput = Object.keys(inputOrder);
         const drink = Object.keys(MENU.DRINK);
         let count = 0;
-        
+
         menuInput.forEach(menu => {
             if (drink.includes(menu)) {
                 count++;

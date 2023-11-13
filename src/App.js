@@ -1,10 +1,12 @@
 import InputView from "./InputView";
 import OutputView from "./OutputView";
 import Validate from "./Validate";
+import { MENU } from "./constants/Menu";
 
 class App {
   date;
   order;
+  totalPrice = 0;
   
   //시작
   async run() {
@@ -34,6 +36,7 @@ class App {
         OutputView.printError(error.message);
       }
     }
+    this.checkEventTarget();
   }
 
   //입력받은 주문 객체로 변경
@@ -45,6 +48,36 @@ class App {
       result[key] = parseInt(value);
     });
     return result;
+  }
+
+  //이벤트 대상인지 확인
+  checkEventTarget() {
+    this.totalPrice = this.calculateTotalPrice();
+    if (this.totalPrice >= 10000) {
+      //이벤트 적용됨
+    } else {
+      //이벤트 적용안됨
+    }
+  }
+
+  //총 금액 계산
+  calculateTotalPrice() {
+    let calculatePrice = 0;
+    for (const [item, quantity] of Object.entries(this.order)) {
+      const price = this.findPriceInMenu(item, MENU);
+      calculatePrice += price * quantity;
+    }
+    return calculatePrice;
+  }
+
+  //메뉴에 해당하는 가격 검색
+  findPriceInMenu(item, menu) {
+    for (const category of Object.values(menu)) {
+      if (item in category) {
+        return category[item];
+      }
+    }
+    return 0;
   }
 }
 
