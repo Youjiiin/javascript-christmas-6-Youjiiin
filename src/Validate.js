@@ -56,6 +56,7 @@ const Validate = {
             }
         });
 
+    
         if (menuInput.length === count) {
             throw new Error(ERROR_MSG.INVALID_ORDER_MESSAGE);
         }
