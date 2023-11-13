@@ -19,6 +19,8 @@ const Validate = {
     //주문 유효성 검사
     validateOrder(inputOrder) {
         let orderSum = 0;
+        this.validateOnlyDrink();
+        this.validateSameMenu();
         for (const [item, amount] of Object.entries(inputOrder)) {
             //숫자가 아닌 수로 주문한 경우
             if (isNaN(amount)) throw new Error(ERROR_MSG.INVALID_ORDER_MESSAGE);
@@ -38,7 +40,7 @@ const Validate = {
 
     //중복된 메뉴를 주문했을 때
     validateSameMenu(inputOrder) {
-        const menuInput = [Object.keys(inputOrder)];
+        const menuInput = Object.keys(inputOrder);
         const setMenuInput = [...new Set(menuInput)];
         if (menuInput.length !== setMenuInput.length) {
             throw new Error(ERROR_MSG.INVALID_ORDER_MESSAGE);
@@ -47,16 +49,16 @@ const Validate = {
 
     //음료만 주문했을 때
     validateOnlyDrink(inputOrder) {
-        const menuInput = [Object.keys(inputOrder)];
-        const drink = [Object.keys(MENU.DRINK)];
+        const menuInput = Object.keys(inputOrder);
+        const drink = Object.keys(MENU.DRINK);
         let count = 0;
+        
         menuInput.forEach(menu => {
-            if (drink.includes(menuInput)) {
+            if (drink.includes(menu)) {
                 count++;
             }
         });
 
-    
         if (menuInput.length === count) {
             throw new Error(ERROR_MSG.INVALID_ORDER_MESSAGE);
         }
