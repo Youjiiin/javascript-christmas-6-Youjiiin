@@ -73,6 +73,10 @@ class App {
   //할인적용
   applyDiscount() {
     this.dDayDiscount = DiscountEvent.christmasDdayDiscount(this.date);
+    this.specialDiscount = DiscountEvent.specialDayDiscount(this.date);
+    this.weekdayDiscount = DiscountEvent.WeekDayDiscount(this.date);
+    this.weekendDiscount = DiscountEvent.WeekendDiscount(this.date);
+    this.giftEvent = DiscountEvent.giftEventDiscount(this.totalPrice);
   }
 
   //총 금액 계산
