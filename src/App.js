@@ -1,3 +1,4 @@
+import DiscountEvent from "./DiscountEvent";
 import InputView from "./InputView";
 import OutputView from "./OutputView";
 import Validate from "./Validate";
@@ -7,6 +8,11 @@ class App {
   date;
   order;
   totalPrice = 0;
+  dDayDiscount = 0;
+  specialDiscount = 0;
+  weekdayDiscount = 0;
+  weekendDiscount = 0;
+  giftEvent = 0;
   
   //시작
   async run() {
@@ -57,10 +63,16 @@ class App {
     if (this.totalPrice >= 10000) {
       //이벤트 적용됨
       this.printOrder();
+      this.applyDiscount();
     } else {
       //이벤트 적용안됨
       this.printOrder();
     }
+  }
+
+  //할인적용
+  applyDiscount() {
+    this.dDayDiscount = DiscountEvent.christmasDdayDiscount(this.date);
   }
 
   //총 금액 계산
