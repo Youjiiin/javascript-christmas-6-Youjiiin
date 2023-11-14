@@ -40,7 +40,7 @@ const DiscountEvent = {
     //주말 할인
     weekendDiscount(date, order) {
         if (WEEKEND.includes(date)) {
-            return this.mainDiscount();
+            return this.mainDiscount(order);
         }
         return 0;
     },
