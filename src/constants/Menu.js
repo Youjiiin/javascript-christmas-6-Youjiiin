@@ -30,5 +30,3 @@ export const MENU_ITEMS = [
     ...Object.keys(MENU.DESSERT),
     ...Object.keys(MENU.DRINK),
 ];
-
-export const DRINK_MENU = [];
