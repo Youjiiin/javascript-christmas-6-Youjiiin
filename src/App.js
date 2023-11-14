@@ -59,6 +59,9 @@ class App {
       try {
         const inputOrder = await InputView.readOrder();
         const convertOrder = this.convertObject(inputOrder);
+        for (let key in convertOrder) {
+          convertOrder[key] = parseInt(convertOrder[key]);
+        }
         this.order = Validate.validateOrder(convertOrder);
         isValid = true;
       } catch (error) {
@@ -73,7 +76,7 @@ class App {
     const result = {};
     items.forEach(element => {
       const [key, value] = element.split('-');
-      result[key] = parseInt(value);
+      result[key] = value;
     });
     return result;
   }
