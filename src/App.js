@@ -2,6 +2,7 @@ import DiscountEvent from "./DiscountEvent";
 import InputView from "./InputView";
 import OutputView from "./OutputView";
 import Validate from "./Validate";
+import { Badge } from "./constants/Badge";
 import { MENU } from "./constants/Menu";
 
 class App {
@@ -118,15 +119,15 @@ class App {
   //뱃지부여
   awardBadge() {
     if (this.totalDiscount > 20000) {
-      return "산타";
+      return Badge[3];
     }
     if (this.totalDiscount > 10000) {
-      return "트리";
+      return Badge[2];
     }
     if (this.totalDiscount > 5000) {
-      return "별";
+      return Badge[1];
     }
-    return "없음";
+    return Badge[0];
   }
 }
 

@@ -1,0 +1,1 @@
+export const Badge = ["없음", "별", "트리", "산타"];
