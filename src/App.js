@@ -8,11 +8,14 @@ class App {
   date;
   order;
   totalPrice = 0;
+
   dDayDiscount = 0;
   specialDiscount = 0;
   weekdayDiscount = 0;
   weekendDiscount = 0;
   giftEvent = 0;
+  totalDiscount = 0;
+  badge = "";
   
   //시작
   async run() {
@@ -77,6 +80,7 @@ class App {
     this.weekdayDiscount = DiscountEvent.WeekDayDiscount(this.date);
     this.weekendDiscount = DiscountEvent.WeekendDiscount(this.date);
     this.giftEvent = DiscountEvent.giftEventDiscount(this.totalPrice);
+    this.sumDiscount();
   }
 
   //총 금액 계산
@@ -103,6 +107,26 @@ class App {
   printOrder() {
     let userOrder = Object.entries(this.order).map(([item, quantity]) => `${item} ${quantity}개`).join('\n');
     OutputView.printMenu(userOrder);
+  }
+
+  //총 할인금액 계산 및 뱃지 확인
+  sumDiscount() {
+    this.totalDiscount = this.dDayDiscount + this.specialDiscount + this.weekdayDiscount + this.weekendDiscount + this.giftEvent;
+    this.badge = this.awardBadge();
+  }
+
+  //뱃지부여
+  awardBadge() {
+    if (this.totalDiscount > 20000) {
+      return "산타";
+    }
+    if (this.totalDiscount > 10000) {
+      return "트리";
+    }
+    if (this.totalDiscount > 5000) {
+      return "별";
+    }
+    return "없음";
   }
 }
 
