@@ -10,6 +10,7 @@ class App {
   
   //시작
   async run() {
+    OutputView.hello();
     let isValid = false;
     while (!isValid) {
       try {
@@ -55,8 +56,10 @@ class App {
     this.totalPrice = this.calculateTotalPrice();
     if (this.totalPrice >= 10000) {
       //이벤트 적용됨
+      this.printOrder();
     } else {
       //이벤트 적용안됨
+      this.printOrder();
     }
   }
 
@@ -78,6 +81,12 @@ class App {
       }
     }
     return 0;
+  }
+
+  //주문한 메뉴 출력
+  printOrder() {
+    let userOrder = Object.entries(this.order).map(([item, quantity]) => `${item} ${quantity}개`).join('\n');
+    OutputView.printMenu(userOrder);
   }
 }
 
